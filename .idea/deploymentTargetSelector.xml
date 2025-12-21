@@ -4,6 +4,23 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
+        <DropdownSelection timestamp="2025-12-21T18:53:07.531742800Z">
+          <Target type="COLD_BOOT">
+            <handle>
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\Almei\.android\avd\Medium_Phone.avd" />
+            </handle>
+          </Target>
+        </DropdownSelection>
+        <DialogSelection>
+          <targets>
+            <Target type="BOOT_WITH_SNAPSHOT">
+              <handle>
+                <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\Almei\.android\avd\Medium_Phone.avd" />
+              </handle>
+              <Snapshot name="snap_2025-12-21_11-37-06" path="C:\Users\Almei\.android\avd\Medium_Phone.avd\snapshots\snap_2025-12-21_11-37-06" />
+            </Target>
+          </targets>
+        </DialogSelection>
       </SelectionState>
     </selectionStates>
   </component>

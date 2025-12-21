@@ -10,6 +10,8 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -17,11 +19,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.perfilesacero.ui.viewmodels.ProductViewModel
 
 @Composable
-fun UserProfileScreen(navController: NavController) {
+fun UserProfileScreen(navController: NavController, productViewModel: ProductViewModel = viewModel()) {
+    val exchangeRate by productViewModel.exchangeRate.collectAsState()
+    val token = "207597190503a82881e0061d97d3220eddf76e1a7e8f88"
+
     Box(modifier = Modifier.fillMaxSize()) {
         Box(
             modifier = Modifier
@@ -101,7 +108,13 @@ fun UserProfileScreen(navController: NavController) {
                         visualTransformation = PasswordVisualTransformation()
                     )
                     Spacer(modifier = Modifier.height(16.dp))
-                    // Add social login buttons here if you want
+                    Button(onClick = { productViewModel.fetchExchangeRate(token) }) {
+                        Text("Consultar Tipo de Cambio")
+                    }
+                    exchangeRate?.let {
+                        Text(text = "Tipo de cambio: $it")
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceEvenly

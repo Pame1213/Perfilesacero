@@ -51,7 +51,7 @@ fun AppNavigation() {
     val productViewModel: ProductViewModel = viewModel()
     NavHost(navController = navController, startDestination = "login") {
         composable("login") { LoginScreen(navController) }
-        composable("user_profile") { UserProfileScreen(navController) }
+        composable("user_profile") { UserProfileScreen(navController, productViewModel) }
         composable("products") { ProductScreen(navController, productViewModel) }
         composable("product_detail") { ProductDetailScreen(navController, productViewModel) }
     }
