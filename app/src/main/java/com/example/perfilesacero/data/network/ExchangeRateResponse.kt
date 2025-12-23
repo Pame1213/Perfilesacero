@@ -2,8 +2,8 @@ package com.example.perfilesacero.data.network
 
 import com.google.gson.annotations.SerializedName
 
-data class BanxicoResponse(
-    val bmx: Bmx
+data class ApiResponse(
+    @SerializedName("bmx") val bmx: Bmx
 )
 
 data class Bmx(

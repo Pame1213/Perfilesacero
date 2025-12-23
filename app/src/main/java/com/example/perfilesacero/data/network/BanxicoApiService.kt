@@ -9,5 +9,5 @@ interface BanxicoApiService {
     suspend fun getExchangeRate(
         @Path("seriesId") seriesId: String = "SF43718",
         @Header("Bmx-Token") token: String
-    ): BanxicoResponse
+    ): ApiResponse
 }

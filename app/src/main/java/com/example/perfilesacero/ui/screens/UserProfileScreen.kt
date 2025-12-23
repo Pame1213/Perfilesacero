@@ -27,7 +27,7 @@ import com.example.perfilesacero.ui.viewmodels.ProductViewModel
 @Composable
 fun UserProfileScreen(navController: NavController, productViewModel: ProductViewModel = viewModel()) {
     val exchangeRate by productViewModel.exchangeRate.collectAsState()
-    val token = "207597190503a82881e0061d97d3220eddf76e1a7e8f88"
+    val token = "c6bb47c0b8b62475e8849a171fc41d6b92911c3d66c1686a6c094ab6a4f23648"
 
     Box(modifier = Modifier.fillMaxSize()) {
         Box(
