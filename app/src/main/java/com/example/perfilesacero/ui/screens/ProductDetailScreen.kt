@@ -18,10 +18,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.perfilesacero.data.productList
+import com.example.perfilesacero.ui.viewmodels.CartViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductDetailScreen(navController: NavController, productId: String?) {
+fun ProductDetailScreen(navController: NavController, productId: String?, cartViewModel: CartViewModel) {
     val product = productList.find { it.id == productId }
 
     Scaffold(
@@ -59,7 +60,15 @@ fun ProductDetailScreen(navController: NavController, productId: String?) {
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold
                 )
+                Spacer(modifier = Modifier.height(16.dp))
                 // Add more product details here if needed
+                Spacer(modifier = Modifier.weight(1f)) // Pushes the button to the bottom
+                Button(
+                    onClick = { cartViewModel.addToCart(product) },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Agregar al carrito")
+                }
             }
         } else {
             Box(
@@ -75,6 +84,6 @@ fun ProductDetailScreen(navController: NavController, productId: String?) {
 @Preview(showBackground = true)
 @Composable
 fun ProductDetailScreenPreview() {
-    // Preview with a sample product
-    ProductDetailScreen(rememberNavController(), "angulo")
+    // Preview with a sample product and a dummy CartViewModel
+    ProductDetailScreen(rememberNavController(), "angulo", cartViewModel = CartViewModel())
 }

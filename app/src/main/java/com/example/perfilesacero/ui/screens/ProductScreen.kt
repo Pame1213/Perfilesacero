@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -42,6 +43,9 @@ fun ProductScreen(navController: NavController) {
                     IconButton(onClick = { /* TODO: Implement search */ }) {
                         Icon(Icons.Default.Search, contentDescription = "Search")
                     }
+                    IconButton(onClick = { navController.navigate("cart") }) {
+                        Icon(Icons.Default.ShoppingCart, contentDescription = "Shopping Cart")
+                    }
                 }
             )
         }
@@ -54,7 +58,6 @@ fun ProductScreen(navController: NavController) {
             ) {
                 items(productList) { product ->
                     ProductCard(product, onClick = {
-                        // Pass the product ID to the detail screen
                         navController.navigate("product_detail/${product.id}")
                     })
                 }

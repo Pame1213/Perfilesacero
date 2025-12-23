@@ -14,11 +14,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.perfilesacero.ui.screens.LoginScreen
-import com.example.perfilesacero.ui.screens.ProductDetailScreen
-import com.example.perfilesacero.ui.screens.ProductScreen
-import com.example.perfilesacero.ui.screens.UserProfileScreen
+import com.example.perfilesacero.ui.screens.* 
 import com.example.perfilesacero.ui.theme.PerfilesaceroTheme
+import com.example.perfilesacero.ui.viewmodels.CartViewModel
 import com.example.perfilesacero.ui.viewmodels.ProductViewModel
 
 
@@ -52,6 +50,8 @@ class MainActivity : ComponentActivity() {
 fun AppNavigation() {
     val navController = rememberNavController()
     val productViewModel: ProductViewModel = viewModel()
+    val cartViewModel: CartViewModel = viewModel() // Create the CartViewModel
+
     NavHost(navController = navController, startDestination = "login") {
         composable("login") { LoginScreen(navController) }
         composable("user_profile") { UserProfileScreen(navController, productViewModel) }
@@ -61,7 +61,8 @@ fun AppNavigation() {
             arguments = listOf(navArgument("productId") { type = NavType.StringType })
         ) { backStackEntry ->
             val productId = backStackEntry.arguments?.getString("productId")
-            ProductDetailScreen(navController, productId)
+            ProductDetailScreen(navController, productId, cartViewModel) // Pass it to the detail screen
         }
+        composable("cart") { CartScreen(navController, cartViewModel) }
     }
 }
