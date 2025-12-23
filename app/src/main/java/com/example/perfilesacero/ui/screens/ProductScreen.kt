@@ -11,8 +11,6 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,18 +21,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.perfilesacero.R
-import com.example.perfilesacero.data.ProductEntity
-import com.example.perfilesacero.ui.viewmodels.ProductViewModel
+import com.example.perfilesacero.data.Product
+import com.example.perfilesacero.data.productList
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductScreen(navController: NavController, productViewModel: ProductViewModel = viewModel()) {
-    val products by productViewModel.allProducts.collectAsState(initial = emptyList())
-
+fun ProductScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -58,14 +52,15 @@ fun ProductScreen(navController: NavController, productViewModel: ProductViewMod
                 modifier = Modifier.weight(1f),
                 contentPadding = PaddingValues(8.dp)
             ) {
-                items(products) { product ->
+                items(productList) { product ->
                     ProductCard(product, onClick = {
-                        navController.navigate("product_detail")
+                        // Pass the product ID to the detail screen
+                        navController.navigate("product_detail/${product.id}")
                     })
                 }
             }
             Button(
-                onClick = { navController.navigate("product_detail") },
+                onClick = { /* TODO: Navigate to an "add product" screen */ },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
@@ -80,7 +75,7 @@ fun ProductScreen(navController: NavController, productViewModel: ProductViewMod
 }
 
 @Composable
-fun ProductCard(product: ProductEntity, onClick: () -> Unit) {
+fun ProductCard(product: Product, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .padding(8.dp)
@@ -89,21 +84,22 @@ fun ProductCard(product: ProductEntity, onClick: () -> Unit) {
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         onClick = onClick
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Box(contentAlignment = Alignment.BottomCenter) {
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_background), // Replace with actual image
+                painter = painterResource(id = product.imageRes),
                 contentDescription = product.name,
                 modifier = Modifier
-                    .height(100.dp)
+                    .height(150.dp)
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)),
+                    .clip(RoundedCornerShape(16.dp)),
                 contentScale = ContentScale.Crop
             )
             Text(
                 text = product.name,
-                modifier = Modifier.padding(8.dp),
+                modifier = Modifier.padding(12.dp),
                 fontWeight = FontWeight.Bold,
-                fontSize = 16.sp
+                fontSize = 18.sp,
+                color = Color.White
             )
         }
     }

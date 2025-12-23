@@ -9,9 +9,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.perfilesacero.ui.screens.LoginScreen
 import com.example.perfilesacero.ui.screens.ProductDetailScreen
 import com.example.perfilesacero.ui.screens.ProductScreen
@@ -53,7 +55,13 @@ fun AppNavigation() {
     NavHost(navController = navController, startDestination = "login") {
         composable("login") { LoginScreen(navController) }
         composable("user_profile") { UserProfileScreen(navController, productViewModel) }
-        composable("products") { ProductScreen(navController, productViewModel) }
-        composable("product_detail") { ProductDetailScreen(navController, productViewModel) }
+        composable("products") { ProductScreen(navController) }
+        composable(
+            "product_detail/{productId}",
+            arguments = listOf(navArgument("productId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val productId = backStackEntry.arguments?.getString("productId")
+            ProductDetailScreen(navController, productId)
+        }
     }
 }
