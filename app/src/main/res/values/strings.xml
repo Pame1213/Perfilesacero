@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Perfilesacero</string>
+    <string name="account_name">Nombre de cuenta</string>
+    <string name="email">Correo</string>
+    <string name="password">Contraseña</string>
+    <string name="repeat_password">Repetir contraseña</string>
+    <string name="consult_exchange_rate">Consultar Tipo de Cambio</string>
+    <string name="exchange_rate">Tipo de cambio: %s</string>
+    <string name="test_app">Probar App</string>
+    <string name="create_account">Crear cuenta</string>
+    <string name="successful_registration">Registro Exitoso</string>
+    <string name="account_created_successfully">Tu cuenta ha sido creada correctamente.</string>
 </resources>

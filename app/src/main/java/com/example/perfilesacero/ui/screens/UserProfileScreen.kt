@@ -159,16 +159,10 @@ fun UserProfileScreen(navController: NavController, productViewModel: ProductVie
                             onClick = {
                                 isEmailError = !Patterns.EMAIL_ADDRESS.matcher(email).matches()
                                 if (!isEmailError && password.isNotEmpty() && password == repeatPassword) {
-                                    when (PackageManager.PERMISSION_GRANTED) {
-                                        ContextCompat.checkSelfPermission(
-                                            context,
-                                            Manifest.permission.POST_NOTIFICATIONS
-                                        ) -> {
-                                            showSuccessfulRegistrationNotification(context)
-                                        }
-                                        else -> {
-                                            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-                                        }
+                                    if (ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                                        showSuccessfulRegistrationNotification(context)
+                                    } else {
+                                        requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                                     }
                                 }
                             },
@@ -188,7 +182,7 @@ private fun showSuccessfulRegistrationNotification(context: Context) {
     val channelId = "PRODUCT_CHANNEL" // Ensure this channel is created as in MainActivity
 
     val notificationBuilder = NotificationCompat.Builder(context, channelId)
-        .setSmallIcon(R.drawable.ic_launcher_foreground) // Default icon
+        .setSmallIcon(R.drawable.ic_launcher_background) // Changed to a known-to-exist icon
         .setContentTitle("Registro Exitoso")
         .setContentText("Tu cuenta ha sido creada correctamente.")
         .setPriority(NotificationCompat.PRIORITY_DEFAULT)

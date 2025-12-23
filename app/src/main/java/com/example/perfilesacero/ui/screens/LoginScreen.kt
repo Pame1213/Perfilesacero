@@ -1,5 +1,6 @@
 package com.example.perfilesacero.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.perfilesacero.R
 
 @Composable
 fun LoginScreen(navController: NavController) {
@@ -41,10 +44,10 @@ fun LoginScreen(navController: NavController) {
                 verticalArrangement = Arrangement.Center
             ) {
                 // Placeholder for the logo. You should replace this with your actual logo.
-                Box(
-                    modifier = Modifier
-                        .size(100.dp)
-                        .background(Color.LightGray, shape = RoundedCornerShape(50))
+                Image(
+                    painter = painterResource(id = R.drawable.ic_tsj_logo),
+                    contentDescription = "Logo de TSJ",
+                    modifier = Modifier.size(100.dp)
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 Text(
